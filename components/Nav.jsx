@@ -96,18 +96,35 @@ const Nav = () => {
                                 height={37}
                                 className="rounded-full"
                                 alt="profile picture"
-                                onClick={() => {
-                                    !setToggleDropdown((prev) => {
-                                        !prev
-                                    })
-                                }}                
+                                onClick={() => !setToggleDropdown((prev) => !prev)}                
                             />
 
                             { toggleDropdown && (
                                 <div className="dropdown">
-                                    <Link>
-                                        6s
+                                    <Link 
+                                        href="/profile"
+                                        className="dropdown_link"
+                                        onClick={() => setToggleDropdown(false)}
+                                    >
+                                        My Profile
                                     </Link>
+                                    <Link 
+                                        href="/create-prompt"
+                                        className="dropdown_link"
+                                        onClick={() => setToggleDropdown(false)}
+                                    >
+                                        Create Prompt
+                                    </Link>
+                                    <button
+                                        type="button"
+                                        onclick={() => {
+                                            setToggleDropdown(false)
+                                            signOut()
+                                        }}
+                                        className="mt-5 w-full black_btn"
+                                    >
+                                        Sign Out
+                                    </button>
                                 </div>
                             )}
                     </div>

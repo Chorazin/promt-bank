@@ -14,6 +14,9 @@ const CoreLayout = ({ children }) => {
     return (
         <html lang="en">
             <body>
+                <Provider>
+
+               
                 <div className="main">
                     <div className="gradient" />
                 </div>
@@ -21,6 +24,7 @@ const CoreLayout = ({ children }) => {
                     <Nav />
                     {children}
                 </main>
+                </Provider>
             </body>
         </html>
     )

@@ -1,11 +1,18 @@
+"use client"
+
 // No need to explicitly import React in Next.js
 //import React from 'react'
 
-const Prov = () => {
+import { SessionProvider } from 'next-auth/react';
+
+
+const Provider = ({ children, session}) => {
     return (
-        <div>Provider</div>
+        <SessionProvider session={session}>
+            { children }
+        </SessionProvider>
     )
 }
 
 
-export default Prov
+export default Provider
