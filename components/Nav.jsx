@@ -14,9 +14,10 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 
 const Nav = () => {
-    const userLogged = false;
+    const userLogged = true;
     /* initialise providers */
     const [providers, setProvider] = useState(null);
+    const [toggleDropdown, setToggleDropdown] = useState(false);
 
     useEffect(() => {
         const setProviders = async () => {
@@ -86,6 +87,49 @@ const Nav = () => {
 
 
             {/* MOBILE NAV */}
+            <div className="sm:hidden flex relative">
+                { userLogged ? (
+                    <div className="flex">
+                            <Image
+                                src="/assets/images/zc.png" 
+                                width={37}
+                                height={37}
+                                className="rounded-full"
+                                alt="profile picture"
+                                onClick={() => {
+                                    !setToggleDropdown((prev) => {
+                                        !prev
+                                    })
+                                }}                
+                            />
+
+                            { toggleDropdown && (
+                                <div className="dropdown">
+                                    <Link>
+                                        6s
+                                    </Link>
+                                </div>
+                            )}
+                    </div>
+                ): (
+                    <div className="flex gap-3 md:gap-5">
+                        {providers && Object.values(providers).map((provider) => {
+                             <button 
+                             type="button" 
+                             key="provider.name"
+                             onclick = { signIn(provider.id) } 
+                             className="outline_btn"
+                             >
+                             Log In
+                         </button>
+                        })}
+                        <button type="button" className="outline_btn">
+                            Sign Up
+                        </button>
+                       
+                    </div>
+                )}
+            </div>
         </nav>
     )
 }
